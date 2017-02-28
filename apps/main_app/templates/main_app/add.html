@@ -1,0 +1,58 @@
+<!DOCTYPE hmtl>
+<html>
+    <head>
+        <meta charset="utf8" />
+        <meta name="descripition" content="Learning about Django"/>
+        <title>Courses</title>
+        
+        {% load static %}
+        <link rel="stylesheet" href={% static "first_app/css/index.css"  %}></link>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src={% static "first_app/js/index.js"  %}></script> 
+        <style>
+            label {
+                   margin:20px;
+                   margin-left:0px;
+                   vertical-align:top;
+            }
+            form input {
+                margin-left:40px;
+                margin-bottom:10px;
+            }
+            form input[type=submit] {
+                margin-left:400px;
+                height:45px;
+                width:80px;
+                color:white;
+                background-color:blue;
+            }
+            
+            
+            
+        </style>
+       
+    </head>
+    <body>
+        <div id="container"> 
+            <form  id="logout" action="{% url 'home:logout' %}"  method="post">
+                {% csrf_token %}               
+                <input type="submit" value="logout"/>              
+            </form> 
+            <button><a href="{% url 'dashboard:home' %}">Home</a></button>  
+            
+            {% for message in messages %}
+                <p>{{ message }}</p>
+             {% endfor %}
+            
+            <form id="new_course" action="{% url 'wishlist:add' %}"  method="post">
+                {% csrf_token %}
+                <h4>Create a New Wish List Item</h4>
+                <label>Item/Product:</label><input type="text" name="item_name"/><br>
+                <input type="submit" name="add" value="Add"/><br>
+                
+            </form>        
+            
+                      
+        </div>
+    </body>
+</html>
